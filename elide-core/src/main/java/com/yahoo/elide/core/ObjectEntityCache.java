@@ -57,9 +57,9 @@ public class ObjectEntityCache {
         }
 
         String oldestKey = resourceCache.keySet().iterator().next();
+        Object evictedEntity = resourceCache.get(oldestKey);
         resourceCache.remove(oldestKey);
-
-        uuidReverseMap.entrySet().removeIf(entry -> getCacheKeyFromUUID(entry.getValue()).equals(oldestKey));
+        uuidReverseMap.remove(evictedEntity);
     }
 
     private String getCacheKeyFromUUID(String uuidValue) {
