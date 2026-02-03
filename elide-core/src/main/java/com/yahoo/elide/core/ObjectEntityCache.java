@@ -79,11 +79,11 @@ public class ObjectEntityCache {
      * @return object
      */
     public Object get(String type, String id) {
-        lock.readLock().lock();
+        lock.writeLock().lock();
         try {
             return resourceCache.get(getCacheKey(type, id));
         } finally {
-            lock.readLock().unlock();
+            lock.writeLock().unlock();
         }
     }
 
